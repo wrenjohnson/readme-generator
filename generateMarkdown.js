@@ -13,8 +13,6 @@ function renderLicenseBadge(license) {
   ## Description
   ${data.description}
   ## Deployed Application URL
-  ${data.link}
-  ## Screenshot
   ![alt-text](${data.screenshot})
   ## Table of Contents
   * [Features](#features)

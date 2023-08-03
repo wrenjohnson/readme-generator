@@ -1,4 +1,5 @@
 const fs = require("fs");
+const inquirer = require("inquirer");
 const path = require("path");
 const generateMarkdown = require("./generateMarkdown");
 
@@ -12,11 +13,6 @@ const questions = [
     type: "input",
     name: "description",
     message: "Please describe the purpose and functionality of this project.",
-  },
-  {
-    type: "input",
-    name: "screenshot",
-    message: "Please provide the relative path to the image you want to use as the screenshot."
   },
   {
     type: "input",
@@ -66,12 +62,20 @@ const questions = [
     name: "test",
     message: "Provide walkthrough of required tests if applicable.",
   },
+  {
+    type: "prompt",
+    name: "questions",
+    message: "If you have any questions feel free to email me at wrenjohnson22@gmail.com.",
+  },
 ];
 
-
-import('inquirer').then((inquirer) => inquirer.prompt(questions)).then((responses) => {console.log("Creating Professional README.md File...");
-writeToFile("./dist/README.md", generateMarkdown({ ...responses }));
-});
+function init() {
+    inquirer.prompt(questions).then((responses) => {
+      console.log("Creating Professional README.md File...");
+      writeToFile("./dist/README.md", generateMarkdown({ ...responses }));
+    });
+  }
+init();
 
 function writeToFile(fileName, data) {
   return fs.writeFileSync(path.join(process.cwd(), fileName), data);
